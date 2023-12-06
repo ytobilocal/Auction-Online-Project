@@ -6,7 +6,8 @@
 package com.mycompany.spring_mvc_project_final.entities;
 
 import com.mycompany.spring_mvc_project_final.enums.Gender;
-import com.mycompany.spring_mvc_project_final.enums.UserStatus;
+import com.mycompany.spring_mvc_project_final.enums.Status;
+
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Column;
@@ -33,17 +34,19 @@ public class AccountEntity implements Serializable {
 
     @Column(unique = true, length = 100)
     private String email;
-    @Column(name = "userName")
-    private String name;
-    @Column(name = "password")
     private String password;
-    @Column(name = "phone")
-    private String numPhone;
+    private String fullName;
+    private String phone;
+    private String address;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserStatus status;
-    @ManyToMany(fetch = FetchType.LAZY)
+    private Status status;
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "account_role",
             joinColumns = @JoinColumn(name = "user_id",
                     referencedColumnName = "id"),
@@ -51,13 +54,14 @@ public class AccountEntity implements Serializable {
                     name = "role_id",
                     referencedColumnName = "id"))
     private Set<RoleEntity> userRoles;
-
     @OneToMany(mappedBy = "account")
-    private Set<CreditCardEntity> creditCards;
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Gender gender = Gender.MALE;
-
+    private Set<CreditEntity>credits;
+    @OneToMany(mappedBy = "account")
+    private Set<CreditCardEntity>creditCards;
+    @OneToMany(mappedBy = "account")
+    private Set<BidEntity>bids;
+    @OneToMany(mappedBy = "account")
+    private Set<AuctionEntity>auctions;
     public AccountEntity() {
     }
 
@@ -77,14 +81,6 @@ public class AccountEntity implements Serializable {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -93,28 +89,28 @@ public class AccountEntity implements Serializable {
         this.password = password;
     }
 
-    public String getNumPhone() {
-        return numPhone;
+    public String getName() {
+        return fullName;
     }
 
-    public void setNumPhone(String numPhone) {
-        this.numPhone = numPhone;
+    public void setName(String name) {
+        this.fullName = name;
     }
 
-    public UserStatus getStatus() {
-        return status;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setStatus(UserStatus status) {
-        this.status = status;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public Set<RoleEntity> getUserRoles() {
-        return userRoles;
+    public String getAddress() {
+        return address;
     }
 
-    public void setUserRoles(Set<RoleEntity> userRoles) {
-        this.userRoles = userRoles;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Gender getGender() {
@@ -125,11 +121,55 @@ public class AccountEntity implements Serializable {
         this.gender = gender;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Set<RoleEntity> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(
+            Set<RoleEntity> userRoles) {
+        this.userRoles = userRoles;
+    }
+
+    public Set<CreditEntity> getCredits() {
+        return credits;
+    }
+
+    public void setCredits(
+            Set<CreditEntity> credits) {
+        this.credits = credits;
+    }
+
     public Set<CreditCardEntity> getCreditCards() {
         return creditCards;
     }
 
-    public void setCreditCards(Set<CreditCardEntity> creditCards) {
+    public void setCreditCards(
+            Set<CreditCardEntity> creditCards) {
         this.creditCards = creditCards;
+    }
+
+    public Set<BidEntity> getBids() {
+        return bids;
+    }
+
+    public void setBids(Set<BidEntity> bids) {
+        this.bids = bids;
+    }
+
+    public Set<AuctionEntity> getAuctions() {
+        return auctions;
+    }
+
+    public void setAuctions(
+            Set<AuctionEntity> auctions) {
+        this.auctions = auctions;
     }
 }

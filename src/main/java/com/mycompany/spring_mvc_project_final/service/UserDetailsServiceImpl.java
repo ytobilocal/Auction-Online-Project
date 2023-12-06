@@ -7,7 +7,8 @@ package com.mycompany.spring_mvc_project_final.service;
 
 import com.mycompany.spring_mvc_project_final.entities.AccountEntity;
 import com.mycompany.spring_mvc_project_final.entities.RoleEntity;
-import com.mycompany.spring_mvc_project_final.enums.UserStatus;
+import com.mycompany.spring_mvc_project_final.enums.Status;
+
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        AccountEntity user = userRepository.findByEmailLikeAndStatusLike(email, UserStatus.ACTIVE);
+        AccountEntity user = userRepository.findByEmailLikeAndStatusLike(email, Status.ACTIVE);
         if (user == null) {
             throw new UsernameNotFoundException(email);
         }

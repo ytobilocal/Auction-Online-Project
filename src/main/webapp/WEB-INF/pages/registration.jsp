@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
-    <link rel="stylesheet" href="<c:url value="/resources/css/registration.css"/>">
+    <style>
+              <%@include file="/resources/css/registration.css" %>
+            </style>
 </head>
 <body>
 
@@ -35,6 +37,13 @@
         <label>Phone: </label>
         <input type="text" name="numPhone" required>
     </div>
+
+<div class="radio-group">
+    <label>Gender: </label>
+    <input type="radio" name="gender" value="MALE" checked> Male
+    <input type="radio" name="gender" value="FEMALE"> Female
+    <input type="radio" name="gender" value="OTHER"> Other
+</div>
 
     <button type="submit" class="btn">Register</button>
 </form>

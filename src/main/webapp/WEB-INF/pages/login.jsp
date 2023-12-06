@@ -36,6 +36,9 @@
 
                 <input type="submit" class="btn" value="Sign in">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+              <a href="<c:url value="/register" />" class="btn">Register</a>
+
             </div>
         </form>
        

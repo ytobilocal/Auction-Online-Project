@@ -1,47 +1,63 @@
 package com.mycompany.spring_mvc_project_final.entities;
 
-import com.mycompany.spring_mvc_project_final.enums.UserStatus;
-
-import javax.persistence.*;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import com.mycompany.spring_mvc_project_final.enums.Status;
+import java.time.LocalDate;
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "Auction")
+@Table(name = "auction")
+
 public class AuctionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer auctionId;
-
+    @Column(name = "auction_id")
+    private long auction_id;
     @ManyToOne
-    @JoinColumn(name = "accountId")
+    @JoinColumn(name = "account_id")
     private AccountEntity account;
-
-
     @ManyToOne
-    @JoinColumn(name = "ProductId")
+    @JoinColumn(name = "product_id")
     private ProductEntity product;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status;
+    @Column(name = "endTime")
+    private String endTime;
+    @Column(name = "startPrice")
+    private double startPrice;
+    @Column(name = "reservePrice")
+    private double reservePrice;
+    @Column(name = "commission")
+    private double commission;
 
-    private BigDecimal startPrice;
-    private BigDecimal reservePrice;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-
-    // getter and setter methods
-
-    public Integer getAuctionId() {
-        return auctionId;
+    public AuctionEntity() {
     }
 
-    public void setAuctionId(Integer auctionId) {
-        this.auctionId = auctionId;
+    public long getAuction_id() {
+        return auction_id;
+    }
+
+    public void setAuction_id(long auction_id) {
+        this.auction_id = auction_id;
     }
 
     public AccountEntity getAccount() {
         return account;
     }
 
-    public void set(AccountEntity account) {
+    public void setAccount(AccountEntity account) {
         this.account = account;
     }
 
@@ -53,35 +69,43 @@ public class AuctionEntity {
         this.product = product;
     }
 
-    public BigDecimal getStartPrice() {
-        return startPrice;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setStartPrice(BigDecimal startPrice) {
-        this.startPrice = startPrice;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
-    public BigDecimal getReservePrice() {
-        return reservePrice;
-    }
-
-    public void setReservePrice(BigDecimal reservePrice) {
-        this.reservePrice = reservePrice;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public double getStartPrice() {
+        return startPrice;
+    }
+
+    public void setStartPrice(double startPrice) {
+        this.startPrice = startPrice;
+    }
+
+    public double getReservePrice() {
+        return reservePrice;
+    }
+
+    public void setReservePrice(double reservePrice) {
+        this.reservePrice = reservePrice;
+    }
+
+    public double getCommission() {
+        return commission;
+    }
+
+    public void setCommission(double commission) {
+        this.commission = commission;
     }
 }

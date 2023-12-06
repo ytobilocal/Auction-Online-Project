@@ -6,5 +6,5 @@
 package com.mycompany.spring_mvc_project_final.enums;
 
 public enum Role {
-    ROLE_BIDDER, ROLE_AUCTIONEER;
+    ROLE_BIDDER, ROLE_AUCTIONEER, ROLE_ADMIN;
 }
