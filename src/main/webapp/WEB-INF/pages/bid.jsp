@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Shop Item - Start Bootstrap Template</title>
+        <title>Shop Item</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -31,20 +31,70 @@
                         <div class="small mb-1">SKU:${product.productId}</div>
                         <h1 class="display-5 fw-bolder">${product.productName}</h1>
                         <div class="fs-5 mb-5">
-                            <span>${auction.startPrice}</span>
+                            <span>Start Price: ${auction.startPrice}</span>
                         </div>
                         <p class="lead">${product.description}</p>
-                        <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi-cart-fill me-1"></i>
-                                Đấu giá
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
-    </section>
+
+                        <!-- Hiển thị form đấu giá khi nhấn vào nút -->
+                        <button class="btn btn-outline-dark flex-shrink-0" type="button" onclick="showBidForm()">
+                            <i class="bi-cart-fill me-1"></i>
+                            Đấu giá
+                        </button>
+
+                        <!-- Form đấu giá -->
+                        <form id="bidForm" class="d-none" action="${pageContext.request.contextPath}/bid/addMoney" method="post" onsubmit="addMoneyToTable(event)">
+                            <label for="amount">Số tiền cộng thêm:</label>
+                            <input type="number" name="amount" step="0.01" required />
+                            <button type="submit">Thêm Tiền</button>
+                        </form>
+
+                        <!-- Script để hiển thị và ẩn form đấu giá và thêm thông tin vào bảng -->
+                        <script>
+                            function showBidForm() {
+                                // Hiển thị form khi nút đấu giá được nhấn
+                                document.getElementById("bidForm").classList.remove("d-none");
+                            }
+
+                            // Thêm thông tin vào bảng và ẩn form đấu giá
+                            function addMoneyToTable(event) {
+                                event.preventDefault();
+
+                                // Lấy giá trị số tiền từ input
+                                var amount = parseFloat(document.getElementsByName("amount")[0].value);
+
+                                // Lấy thông tin người đấu giá và thời gian (đã giả sử có sẵn)
+                                var bidder = "Người đấu giá"; // Thay bằng thông tin người đấu giá thực tế
+                                var time = new Date().toLocaleString(); // Lấy thời gian hiện tại
+
+                                // Tạo một hàng mới trong bảng và thêm vào
+                                var table = document.getElementById("moneyTable").getElementsByTagName('tbody')[0];
+                                var newRow = table.insertRow(table.rows.length);
+                                var cell1 = newRow.insertCell(0);
+                                var cell2 = newRow.insertCell(1);
+                                var cell3 = newRow.insertCell(2);
+
+                                cell1.innerHTML = amount.toFixed(2); // Hiển thị số tiền với 2 chữ số sau dấu thập phân
+                                cell2.innerHTML = bidder;
+                                cell3.innerHTML = time;
+
+                                // Ẩn form đấu giá sau khi thêm tiền
+                                document.getElementById("bidForm").classList.add("d-none");
+                            }
+                        </script>
+
+                        <!-- Bảng hiển thị thông tin những người đấu giá-->
+                        <table id="moneyTable" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Người đấu giá</th>
+                                    <th>Thời gian</th>
+                                    <th>Số tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Các hàng trong bảng -->
+                                <!-- ... -->
+                            </tbody>
+                        </table>
     </body>
 </html>

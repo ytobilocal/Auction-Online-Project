@@ -1,29 +1,53 @@
 package com.mycompany.spring_mvc_project_final.controller;
 
+import com.mycompany.spring_mvc_project_final.entities.AuctionEntity;
+import com.mycompany.spring_mvc_project_final.entities.ProductEntity;
 import com.mycompany.spring_mvc_project_final.repository.AccountRepository;
 import com.mycompany.spring_mvc_project_final.repository.AuctionRepository;
+import com.mycompany.spring_mvc_project_final.repository.BidRepository;
 import com.mycompany.spring_mvc_project_final.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
+
 @Controller
+@RequestMapping("/bid")
 public class BidController {
+
     @Autowired
-    AccountRepository accountRepository;
+    private AccountRepository accountRepository;
+
     @Autowired
-    AuctionRepository auctionRepository;
+    private AuctionRepository auctionRepository;
+
     @Autowired
-    ProductRepository productRepository;
-    @RequestMapping(value = "/bid/{id}",method = RequestMethod.GET)
-    public String showBid(Model model, @PathVariable long id){
-//        model.addAttribute("product",productRepository.findById(id));
-//        model.addAttribute("msg","Sửa vật phẩm");
-//        model.addAttribute("type","update");
-//        model.addAttribute("action","update");
-        return "bid";
+    private ProductRepository productRepository;
+
+    @Autowired
+    private BidRepository bidRepository;
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String showBid(Model model, @PathVariable long id) {
+        ProductEntity product = productRepository.findById(id).orElse(null);
+        // Kiểm tra xem sản phẩm có tồn tại không
+        if (product != null) {
+
+            AuctionEntity auction = product.getAuctions().stream().findFirst().orElse(null);
+            if (auction != null) {
+                model.addAttribute("startPrice", auction.getStartPrice());
+            }
+
+            // Thêm sản phẩm vào model để hiển thị trên trang bid.jsp
+            model.addAttribute("product", product);
+            model.addAttribute("auction", auction);
+            return "bid";
+        } else {
+            // Nếu không tìm thấy sản phẩm, có thể chuyển hướng hoặc xử lý theo cách khác
+            return "redirect:/";
+        }
     }
+
 }
