@@ -18,25 +18,13 @@
         <div class="container" >
             <div class="row" >
                     <div class="logo">
+                    <a  href="<c:url value="/" />">
                         <img src="../../resources/img/logo1.png" alt="logo" width=200px>
+                    </a>
                     </div>
                     <div class="main-menu">
-                        <div class="menu-select">
-                          <select class="form-select" aria-label="Disabled select example" style="border: none;">
-                              <option selected><a href="">Tài sản đấu giá</a></option>
-                              <option value="1"><a href="">Nghệ thuật</a></option>
-                              <option value="2"><a href="">Xe cộ</a></option>
-                              <option value="3"><a href="">Hàng xa xỉ</a></option>
-                          </select>
-                        </div>
-                        <div class="menu-select">
-                          <select class="form-select" aria-label="Disabled select example" style="border: none;">
-                               <option selected><a href=""> Cuộc đấu giá</a></option>
-                               <option value="1"><a href="">Sắp đấu giá</a></option>
-                               <option value="2"><a href="">Đang đấu giá</a></option>
-                               <option value="3"><a href="">Đã kết thúc</a></option>
-                          </select>
-                        </div>
+                        <!-- Search form -->
+                        <div class="menu-select-2"><input class="form-control" type="text" placeholder="Search" aria-label="Search"></div>
                         <div class="menu-select-1">
                           <a>Tin tức</a>
                         </div>
@@ -47,6 +35,7 @@
                           <a>Liên hệ</a>
                         </div>
                     </div>
+
                     <div class="login">
                             <div class="header__top__links" >
                                 <sec:authorize access="isAuthenticated()">
@@ -58,6 +47,7 @@
                                         <a style="color: black;" href="<c:url value="/auctioneer/home" />">Auctioneer Home</a>
                                     </sec:authorize>
 
+                                    <a style="color: black;" href="<c:url value="/account" />">Account</a>
                                     <a style="color: black;" href="<c:url value="/logout" />">Logout</a>
                                 </sec:authorize>
 

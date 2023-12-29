@@ -35,15 +35,21 @@
     <div class="textbox">
         <i class="fas fa-phone"></i>
         <label>Phone: </label>
-        <input type="text" name="numPhone" required>
+        <input type="text" name="phone" required>
     </div>
 
-<div class="radio-group">
-    <label>Gender: </label>
-    <input type="radio" name="gender" value="MALE" checked> Male
-    <input type="radio" name="gender" value="FEMALE"> Female
-    <input type="radio" name="gender" value="OTHER"> Other
-</div>
+    <div class="textbox">
+        <i class="fas fa-home"></i>
+        <label>Address: </label>
+        <input type="text" name="address" required>
+    </div>
+
+    <div class="radio-group">
+        <label>Gender: </label>
+        <input type="radio" name="gender" value="MALE" checked> Male
+        <input type="radio" name="gender" value="FEMALE"> Female
+        <input type="radio" name="gender" value="OTHER"> Other
+    </div>
 
     <button type="submit" class="btn">Register</button>
 </form>

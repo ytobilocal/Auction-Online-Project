@@ -7,11 +7,10 @@ import com.mycompany.spring_mvc_project_final.enums.Status;
 import com.mycompany.spring_mvc_project_final.repository.RoleRepository;
 import com.mycompany.spring_mvc_project_final.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,28 +24,33 @@ public class RegistrationController {
     @Autowired
     private RoleRepository roleRepository;
 
-    @GetMapping("/register")
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
+    @RequestMapping(value = "/register",method = RequestMethod.GET)
     public String showRegistrationForm(Model model) {
         model.addAttribute("account", new AccountEntity());
         return "registration";
     }
 
-    @PostMapping("/register")
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
     public String registerAccount(@ModelAttribute("account") AccountEntity account, Model model) {
         if (account == null) {
             model.addAttribute("error", "Invalid account data");
             return "registration";
         }
 
+        // Mã hóa mật khẩu sử dụng BCrypt
+        String encryptedPassword = bCryptPasswordEncoder.encode(account.getPassword());
+        account.setPassword(encryptedPassword);
+
         Set<RoleEntity> userRoles = new HashSet<>();
         userRoles.add(roleRepository.findByRole(Role.ROLE_BIDDER));
         account.setUserRoles(userRoles);
 
-
-        // Set các giá trị khác cho tài khoản
         account.setStatus(Status.ACTIVE);
 
-        // Lưu vào cơ sở dữ liệu
         accountService.saveAccount(account);
 
         return "redirect:/login";

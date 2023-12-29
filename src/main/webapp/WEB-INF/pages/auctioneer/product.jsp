@@ -5,10 +5,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="description" content="Male_Fashion Template">
-        <meta name="keywords" content="Male_Fashion, unica, creative, html">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Home Page</title>
         <jsp:include page="../include/css-page.jsp"/>
         <link rel="stylesheet" type="text/css" href='${pageContext.request.getContextPath()}/webjars/bootstrap/5.1.3/css/bootstrap.min.css' />

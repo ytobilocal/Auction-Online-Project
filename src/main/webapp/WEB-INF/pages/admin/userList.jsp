@@ -25,7 +25,6 @@
                 <th>Status</th>
                 <th>Roles</th>
                 <th>Gender</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -42,11 +41,6 @@
                         </c:forEach>
                     </td>
                     <td>${account.gender}</td>
-                    <td>
-                        <a href="editAccount?id=${account.id}">Edit</a>
-                        <a href="deleteAccount?id=${account.id}">Delete</a>
-                    </td>
-
                 </tr>
             </c:forEach>
         </tbody>

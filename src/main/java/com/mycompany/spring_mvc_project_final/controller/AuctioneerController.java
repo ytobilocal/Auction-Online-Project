@@ -70,9 +70,8 @@ public class AuctioneerController {
         productRepository.save(product);
         return "redirect:/";
     }
-    @RequestMapping(value = "/delete/{product_id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
     public String deleteProduct(@PathVariable long id){
-
         productRepository.deleteById(id);
         return "redirect:/";
     }

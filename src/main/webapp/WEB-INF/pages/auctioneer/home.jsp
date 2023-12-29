@@ -25,9 +25,9 @@
        <main>
        		<div class="container">
        			<div class="col1">
-              <img src="../resources/img/icon/e5cdbc210d1ab01400816e6021440768.jpg">
+           <!--   <img src="../resources/img/icon/e5cdbc210d1ab01400816e6021440768.jpg"> -->
               <h3>Tài sản đang chuẩn bị đấu giá</h3>
-              <img src="../resources/img/icon/e5cdbc210d1ab01400816e6021440768.jpg">
+           <!--   <img src="../resources/img/icon/e5cdbc210d1ab01400816e6021440768.jpg"> -->
        			</div>
        			<div class="col2">
        			   <div class="item-menu">

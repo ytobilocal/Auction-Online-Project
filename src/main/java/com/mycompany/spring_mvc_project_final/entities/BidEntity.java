@@ -1,43 +1,56 @@
 package com.mycompany.spring_mvc_project_final.entities;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import com.mycompany.spring_mvc_project_final.enums.Status;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "Bid")
+@Table(name = "bid")
+
 public class BidEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer bidId;
-
+    @Column(name = "bid_id")
+    private long bid_id;
     @ManyToOne
-    @JoinColumn(name = "auctionId")
-    private AuctionEntity auction;
-
-    @ManyToOne
-    @JoinColumn(name = "accountId")
+    @JoinColumn(name = "account_id")
     private AccountEntity account;
+    @ManyToOne
+    @JoinColumn(name = "auction_id")
+    private AuctionEntity auction;
+    @Column(name = "timeStamp")
+    private String timeStamp;
+    @Column(name = "amount")
+    private double amount;
+    @Column(name = "status",nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
-    private BigDecimal amount;
-    private LocalDateTime timestamp;
-
-    // getter and setter methods
-
-    public Integer getBidId() {
-        return bidId;
+    public BidEntity() {
     }
 
-    public void setBidId(Integer bidId) {
-        this.bidId = bidId;
+    public Status getStatus() {
+        return status;
     }
 
-    public AuctionEntity getAuction() {
-        return auction;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
-    public void setAuction(AuctionEntity auction) {
-        this.auction = auction;
+    public long getBid_id() {
+        return bid_id;
+    }
+
+    public void setBid_id(long bid_id) {
+        this.bid_id = bid_id;
     }
 
     public AccountEntity getAccount() {
@@ -48,21 +61,27 @@ public class BidEntity {
         this.account = account;
     }
 
-    public BigDecimal getAmount() {
+    public AuctionEntity getAuction() {
+        return auction;
+    }
+
+    public void setAuction(AuctionEntity auction) {
+        this.auction = auction;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
 }
-
-

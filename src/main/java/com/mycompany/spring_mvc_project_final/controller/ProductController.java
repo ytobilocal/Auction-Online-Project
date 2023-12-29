@@ -1,54 +1,56 @@
-//package com.mycompany.spring_mvc_project_final.controller;
-//
-//import com.mycompany.spring_mvc_project_final.entities.ProductEntity;
-//import com.mycompany.spring_mvc_project_final.repository.ProductRepository;
-//import org.apache.commons.io.IOUtils;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.MediaType;
-//import org.springframework.mail.javamail.JavaMailSender;
-//import org.springframework.mail.javamail.MimeMessageHelper;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.*;
-//import org.springframework.web.multipart.MultipartFile;
-//import org.springframework.web.servlet.ModelAndView;
-//
-//import javax.mail.MessagingException;
-//import javax.mail.internet.MimeMessage;
-//import javax.servlet.http.HttpServletResponse;
-//import java.io.ByteArrayInputStream;
-//import java.io.IOException;
-//import java.io.InputStream;
-//import java.util.List;
-//
-//
-//@Controller
-//@RequestMapping("/user")
-//public class ProductController {
-//    @Autowired
-//    JavaMailSender javaMailSender;
-//    @Autowired
-//    ProductRepository productRepository;
-//    @RequestMapping(value = "/sendMail")
-//    public ModelAndView testSendMail(ModelAndView model) throws IOException {
-//        // Send mail
-//        System.out.println("Send Mail ==>");
-//        String emailTo = "emtyomeka@gmail.com";
-//        sendEmail(emailTo,"Subject", "Hello all");
-//        model.addObject("msg", emailTo);
-//        return new ModelAndView("user/email");
-//    }
-//    public void sendEmail(String recipient, String subject, String body) {
-//        MimeMessage message = javaMailSender.createMimeMessage();
-//        try {
-//            MimeMessageHelper helper = new MimeMessageHelper(message, true);
-//            helper.setTo(recipient);
-//            helper.setSubject(subject);
-//            helper.setText(body, true);
-//            javaMailSender.send(message);
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        }
-//    }
+package com.mycompany.spring_mvc_project_final.controller;
+
+import com.mycompany.spring_mvc_project_final.entities.ProductEntity;
+import com.mycompany.spring_mvc_project_final.repository.ProductRepository;
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
+
+@Controller
+@RequestMapping("/user")
+public class ProductController {
+    @Autowired
+    JavaMailSender javaMailSender;
+    @Autowired
+    ProductRepository productRepository;
+
+    @RequestMapping(value = "/sendMail")
+    public ModelAndView testSendMail(ModelAndView model) throws IOException {
+        // Send mail
+        System.out.println("Send Mail ==>");
+        String emailTo = "emtyomeka@gmail.com";
+        sendEmail(emailTo, "Subject", "Hello all");
+        model.addObject("msg", emailTo);
+        return new ModelAndView("user/email");
+    }
+
+    public void sendEmail(String recipient, String subject, String body) {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setTo(recipient);
+            helper.setSubject(subject);
+            helper.setText(body, true);
+            javaMailSender.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
 //    @RequestMapping(value = "/insertImage", method = RequestMethod.POST,
 //            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
 //            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -120,4 +122,4 @@
 //        productRepository.deleteById(productId);
 //        return new ModelAndView("redirect:/user/fetch");
 //    }
-//}
+}

@@ -16,7 +16,7 @@
 	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
 	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
 	crossorigin="anonymous">
-<title>Document</title>
+<title>Admin Home</title>
 </head>
 
 <body class="bg-dark">
@@ -38,7 +38,7 @@
 				<ul class="navbar-nav">
 <li class="nav-item active"><a class="nav-link" href="/admin/home/userList">Manage User</a></li>
 
-					<li class="nav-item active"><a class="nav-link" href="/">Logout</a></li>
+					<li class="nav-item active"><a class="nav-link" href="/">Exit</a></li>
 				</ul>
 
 			</div>

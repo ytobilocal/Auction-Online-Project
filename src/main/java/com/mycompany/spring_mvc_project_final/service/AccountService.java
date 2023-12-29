@@ -32,15 +32,19 @@ public class AccountService {
     public void saveAccount(AccountEntity account) {
         accountRepository.save(account);
     }
-
-    public AccountEntity getAccountById(String accountId) {
+    public AccountEntity findById(long id) {
         return null;
     }
 
-    public void deleteAccountById(String accountId) {
+    public void save(AccountEntity updatedAccount) {
+    }
+    public void deleteById(long id) {
     }
 
-    public void updateAccount(AccountEntity updatedAccount) {
+    public AccountEntity getAccountById(Long id) {
+        return null;
+    }
 
+    public void deleteAccountById(Long id) {
     }
 }

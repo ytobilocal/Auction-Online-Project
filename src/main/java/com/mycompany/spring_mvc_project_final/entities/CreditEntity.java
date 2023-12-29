@@ -1,29 +1,36 @@
 package com.mycompany.spring_mvc_project_final.entities;
 
-import org.springframework.security.core.userdetails.User;
-
-import javax.persistence.*;
-import java.math.BigDecimal;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "Credit")
+@Table(name = "credit")
+
 public class CreditEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer creditId;
-
+    @Column(name = "credit_id")
+    private long credit_id;
     @ManyToOne
-    @JoinColumn(name = "accountId")
+    @JoinColumn(name = "account_id")
     private AccountEntity account;
-
-    private BigDecimal balance;
-// getter and setter methods
-    public Integer getCreditId() {
-        return creditId;
+    @Column(name = "balance")
+    private double balance;
+    public CreditEntity() {
     }
 
-    public void setCreditId(Integer creditId) {
-        this.creditId = creditId;
+    public long getCredit_id() {
+        return credit_id;
+    }
+
+    public void setCredit_id(long credit_id) {
+        this.credit_id = credit_id;
     }
 
     public AccountEntity getAccount() {
@@ -34,11 +41,11 @@ public class CreditEntity {
         this.account = account;
     }
 
-    public BigDecimal getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(BigDecimal balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 }

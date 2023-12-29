@@ -6,6 +6,8 @@
 package com.mycompany.spring_mvc_project_final.repository;
 
 import com.mycompany.spring_mvc_project_final.entities.RoleEntity;
+
+import java.util.List;
 import java.util.Set;
 
 import com.mycompany.spring_mvc_project_final.enums.Role;

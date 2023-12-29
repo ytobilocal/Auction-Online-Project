@@ -61,3 +61,19 @@ body{
 .btn:hover{
     background:none;
 }
+button.btn {
+    display: block;
+    width: 100%;
+    background: black;
+    border: 2px solid rgba(126, 252, 0, 0.76);
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 0px;
+    outline: none;
+}
+button.btn:hover {
+    background: none;
+    color: black;
+}
